@@ -1,0 +1,1921 @@
+{
+  "name": "Main Multi-Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "name": "text_retrieval_tool",
+        "description": "Call this tool to return all text from the given website. Query should be full website URL.",
+        "workflowId": "b8rgtwVVL4p98xkd"
+      },
+      "id": "95f77afc-7033-4bd6-8210-c3cb8dd35cd6",
+      "name": "Text (profile)",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "content": "Extracts text from website and return the output to Agent",
+        "height": 80,
+        "width": 150,
+        "color": 5
+      },
+      "id": "603c1b04-1fa1-4b99-a350-345711d97781",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2048,
+        817
+      ]
+    },
+    {
+      "parameters": {
+        "content": "Extracts all url/links from a website and returns output to Agent",
+        "height": 194.82656601409676,
+        "width": 157.8125,
+        "color": 4
+      },
+      "id": "06a4f075-673c-4a80-b49f-02d097f2e598",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Get companies from database\nRetrieve names and websites of companies from Google sheets table to process crawling.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n💡 **You can replace Sheets with other database of your choice.** Hubspot / Attio / Airtable",
+        "height": 480,
+        "width": 222,
+        "color": 7
+      },
+      "id": "1ef87673-d025-4225-8a29-ed6986dbc73d",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        440,
+        860
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Set parameters for execution\nPass only `name` and `website` values from database. \n\n⚠️ **If you use other field namings, update this node.**",
+        "height": 399.94285735226526,
+        "width": 221.7729148148145,
+        "color": 7
+      },
+      "id": "53d802e6-97f8-4a87-bda2-c5d234bccc85",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        700,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "content": "Automated Website Data Crawler\nThis workflow scans websites and collects key information, including:\n\nSocial media profile links\nA summarized company profile and key features\nLeads from email extraction\n💡 Need different data? You can customize this workflow to find specific contacts, details, or any other information you need!",
+        "height": 205.5672398548037,
+        "width": 475.828493734213,
+        "color": 7
+      },
+      "id": "91adc968-adb5-423c-a38e-90d682c11157",
+      "name": "Sticky Note13",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -800,
+        760
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "name": "url_retrieval_tool",
+        "description": "Call this tool to return all URLs from the given website. Query should be full website URL.",
+        "workflowId": "xkqmLg3LnYWtfz0b"
+      },
+      "id": "8599c27e-bc21-4af9-b925-571abeffbbc7",
+      "name": "URLs (social media)",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        2260,
+        2660
+      ]
+    },
+    {
+      "parameters": {
+        "name": "text_retrieval_tool",
+        "description": "Call this tool to return all text from the given website. Query should be full website URL.",
+        "workflowId": "b8rgtwVVL4p98xkd"
+      },
+      "id": "68b29666-9070-4b61-8bce-11028a21453f",
+      "name": "Text (contact details)",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        2060,
+        2660
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"social_media\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"platform\": {\n            \"type\": \"string\",\n            \"description\": \"The name of the social media platform (e.g., LinkedIn, Instagram)\"\n          },\n          \"urls\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\",\n              \"format\": \"uri\",\n              \"description\": \"A URL for the social media platform\"\n            }\n          }\n        },\n        \"required\": [\"platform\", \"urls\"],\n        \"additionalProperties\": false\n      }\n    }\n  },\n  \"required\": [\"platforms\"],\n  \"additionalProperties\": false\n}\n"
+      },
+      "id": "43870b23-b325-4894-b123-4301aa590be2",
+      "name": "JSON Parser (social media)1",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        2580,
+        2280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "Extracts text from website and return the output to Agent",
+        "height": 218.39037102584413,
+        "width": 157.8125,
+        "color": 4
+      },
+      "id": "00f0ddb5-5af6-4c04-8dd2-ba3cf0a29dd1",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2020,
+        2580
+      ]
+    },
+    {
+      "parameters": {
+        "content": "Extracts all url/links from a website and returns output to Agent",
+        "height": 216.0339905246693,
+        "width": 157.8125,
+        "color": 6
+      },
+      "id": "78e75610-183d-445d-827e-c6251b65100e",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2220,
+        2580
+      ]
+    },
+    {
+      "parameters": {
+        "name": "url_retrieval_tool",
+        "description": "Call this tool to return all URLs from the given website. Query should be full website URL.",
+        "workflowId": "xkqmLg3LnYWtfz0b"
+      },
+      "id": "d6875608-4214-48fa-af9f-e456c76c95ba",
+      "name": "URLs (profile)",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        2260,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e9e82034-b44c-4fed-bca5-9a9ac7a50a90",
+              "name": "company_name",
+              "value": "={{ $json.company }}",
+              "type": "string"
+            },
+            {
+              "id": "b23c5722-d52b-4db6-b32b-5c52cb1d4eed",
+              "name": "website",
+              "value": "={{ $json.website }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "company_name,website",
+        "options": {}
+      },
+      "id": "7251f0a2-2c80-4763-b0f0-becee5ead924",
+      "name": "Select company name and website",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        960,
+        1040
+      ],
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini-2024-07-18",
+        "options": {
+          "baseURL": "https://api.openai.com/v1",
+          "responseFormat": "text",
+          "temperature": 0.9
+        }
+      },
+      "id": "df234b7e-977e-43a5-a5db-f5148995f034",
+      "name": "OpenAI (profile)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        700
+      ],
+      "notesInFlow": false,
+      "credentials": {
+        "openAiApi": {
+          "id": "9WpWmiE8A7Gl3BYM",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "7392a78e-115c-4d0f-9297-70c7da2c5a7e",
+      "name": "Wait1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1840,
+        2340
+      ],
+      "webhookId": "2dd6b876-9ce9-4e40-903f-ab13c9a75266",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ae484e44-36bc-4d88-9772-545e579a261c",
+              "name": "company_name",
+              "value": "={{ $json.company_name }}",
+              "type": "string"
+            },
+            {
+              "id": "c426ab19-649c-4443-aabb-eb0826680452",
+              "name": "company_website",
+              "value": "={{ $json.website }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "de316880-5c79-4018-9443-bb7fe76306eb",
+      "name": "Set name and website",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2180,
+        960
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c8594196-8c3a-4517-abbd-014c3e4c0efd",
+              "name": "company_profile",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "270f1804-b2e8-4b41-9315-a055d3425acd",
+      "name": "Set company profile",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        2580,
+        300
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5e15eb77-0a87-44fd-a218-fa666de9bf6e",
+              "name": "social_media",
+              "value": "={{ JSON.stringify($json.output.social_media) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ebc86279-5390-4eb1-b69e-7b6216d0bf00",
+      "name": "Set social media profiles",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2680,
+        2120
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "710dbccf-c5cd-40a4-afc8-64cff2a82e70",
+      "name": "Loop Over Items1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1520,
+        2140
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "518f9da9-a579-4fce-944b-7f15eb7b4661",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1540,
+        320
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {},
+      "id": "7daa0106-c71d-4c55-80c4-9e1780922181",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1840,
+        480
+      ],
+      "webhookId": "29e7738c-c131-4de6-b512-870b40b0a002",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "id": "b6548f66-d336-4f17-87c3-30cbb0e764f8",
+      "name": "Wait2",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1820,
+        1620
+      ],
+      "webhookId": "23f05fba-080c-4df9-a701-a9f395760961"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "c87a7a85-c1d1-4bc7-8e49-ec6c33bbdea2",
+      "name": "Aggregate",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2120,
+        1340
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# COMPANY PROFILE DATA SCRAPER AGENT",
+        "height": 663.7709677077205,
+        "width": 1702.951928323012,
+        "color": 7
+      },
+      "id": "31f92ba0-f38f-401e-95c0-3bd09f529628",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# SOCIAL MEDIA LINKS SCRAPER AGENT",
+        "height": 746.0248811939579,
+        "width": 1684.4999264517733,
+        "color": 7
+      },
+      "id": "3156d4dd-0076-423f-93ad-0e6bc0a95147",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        2060
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "emails",
+        "options": {}
+      },
+      "id": "c0920387-6128-4095-80e7-14fe8b594219",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        3920,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Retrieve input from JSON, fallback to an empty string if it's not defined\nconst data = $json.emails || '';\n\n// Ensure input is a string\nconst inputString = Array.isArray(data) ? data.join(' ') : String(data);\n\n// Improved regex to match emails and exclude image extensions like .png, .jpg, .gif, .jpeg\nconst emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?!png|jpg|gif|jpeg)[a-zA-Z]{2,}/g;\n\n// Match valid email addresses\nlet emails = inputString.match(emailRegex) || []; // Default to empty array if no match\n\n// Deduplicate the email addresses\nemails = [...new Set(emails)];\n\n// Log output for debugging in n8n\nconsole.log(\"Matched Emails:\", emails);\n\n// Limit the result to the first 5 email addresses\nemails = emails.slice(0, 2);\n\n// Return the cleaned list of emails in n8n-compatible format\nreturn { json: { emails: emails } };\n"
+      },
+      "id": "a5cdda36-5cb0-459e-89b2-d6cf4efb78da",
+      "name": "Parse emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3700,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Verify and Enrich Leads",
+        "height": 276,
+        "width": 1871,
+        "color": 7
+      },
+      "id": "325509d2-754a-4f5e-8f92-10a65910575a",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2980,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## To streamline your lead acquisition and engagement, integrate industry-leading tools that automate data enrichment, email discovery, and outreach. Here are some top options:  \n\n- **Reoon** – Extract verified email addresses effortlessly.  \n- **Apollo** – A robust sales intelligence platform for lead discovery and engagement.  \n- **Trigify** – Automate data scraping and insights generation.  \n- **PhantomBuster** – Extract and enrich LinkedIn profiles and web data.  \n- **Instantly** – AI-powered cold outreach with high deliverability.  \n- **And more…**  \n",
+        "height": 359,
+        "width": 654,
+        "color": 5
+      },
+      "id": "990eb652-66fe-44e2-8ff2-b4a5142658c6",
+      "name": "Sticky Note10",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3420,
+        880
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### When new websites added within Google Sheets\nRetrieve websites of companies from Google sheets table to process crawling as an output of Google Maps Scraper automation.\n\n💡 **You can replace Sheets with other database of your choice.**",
+        "height": 453.58494724510444,
+        "width": 221.7729148148145,
+        "color": 7
+      },
+      "id": "d8caf83e-8f9e-42bb-bc76-12ec28c97b19",
+      "name": "Sticky Note11",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9f4272b9-408a-4031-b102-50b78fece2a2",
+              "name": "company_details",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dcab9a9f-82f1-4d08-a12e-c61e22cce7f7",
+      "name": "Set Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2100,
+        2120
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.website }}",
+        "options": {}
+      },
+      "id": "da2cd25f-57a7-4e33-8dde-245d33f175d4",
+      "name": "Query Website",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2000,
+        1620
+      ],
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1a26b3f1-c0a5-4521-b9eb-27b360513005",
+              "name": "emails",
+              "value": "={{ $json.emails }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0377629f-3aba-4034-b175-d14d913681da",
+      "name": "Map Emails",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3520,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "46b8537b-e2dd-47b4-8ed1-8cbfe2c0ba6a",
+              "name": "emails",
+              "value": "={{ $json.email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "499763b7-55c3-4ece-8d33-9ded0b8069e3",
+      "name": "Set Email List",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5160,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "2853c98d-caf9-4581-bd60-1844a31cdb5e",
+      "name": "Merge Company details and profile info",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        3080,
+        400
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "✅ Important Note\nTo make this automation run smoothly, you’ll need these additional workflows:\n\nText Scraper – Extracts key content from web pages.\nURL Scraper – Collects and organizes website links.\nWeb Scraper (SERP API) – Finds and pulls business data from search results.\nDon’t forget to add your API keys and set up the workflow steps properly.\n\nThanks for using this template! ",
+        "height": 236.31654065757436,
+        "width": 719.7417675583615,
+        "color": 3
+      },
+      "id": "07b39911-cb7e-47d1-b5fd-29859441644d",
+      "name": "Sticky Note14",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1620,
+        740
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Retrieve social media profile URLs from this website: {{ $json.website }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an automated web crawler tasked with extracting leads and contact details such as: email, phone, job title/designation, and social media URLs from a webpage provided by the user. You have access to a text retrieval tool to gather all text content from the page and a URL retrieval tool to identify and navigate through links on the page (e.g. About page, Team info page, etc.). Utilize the URLs retrieved to crawl additional pages. Your objective is to provide a unified JSON output containing the extracted data (people names, contact details, emails, phone numbers, and links to all possible social media profiles from the website)."
+        }
+      },
+      "id": "f0b7b28d-bca6-4c62-a242-75761d90fdcb",
+      "name": "Contacts & Social links",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        2040,
+        2340
+      ],
+      "retryOnFail": true,
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Parse the incoming data to extract the details such as Email and Social Media Links from the following input data:{{ $json.company_details }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are a data parsing assistant tasked with extracting social media URLs from the data provided. Your objective is to provide a unified JSON output containing the extracted data (links to all possible social media profiles from the website)."
+            }
+          ]
+        }
+      },
+      "id": "243985d3-b6a7-4d39-b111-7a16aa261892",
+      "name": "Social Links Parser Agent",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        2340,
+        2120
+      ],
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Retrieve information about profile of the company from this website: {{ $json.website }}",
+        "options": {
+          "systemMessage": "You are an automated web crawler tasked with extracting company profile information from a webpage provided by the user. You have access to a text retrieval tool to gather all text content from the page and a URL retrieval tool to identify and navigate through links on the page. Utilize the URLs retrieved to crawl additional pages. Navigate to the page that potentially includes information about the company and return its brief profile (what it does, products, services, area of activity etc.). Your objective is to provide a short text summary containing the extracted data. Present the information in plain text format, without any formatting, bullet points, or special characters. Limit your response to a concise paragraph of 3-5 sentences. Focus on the most essential details about the company's core business, main products or services, and primary industry or market. Avoid using technical jargon or complex language. If you encounter multiple possible interpretations or conflicting information, provide the most likely or prevalent details. Do not include any disclaimers, explanations of your process, or additional commentary beyond the requested company profile summary."
+        }
+      },
+      "id": "bddb2a4c-171d-4d1e-a390-9485b36c51f4",
+      "name": "Company profile",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        2040,
+        480
+      ],
+      "retryOnFail": true,
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "60adc193-a847-4e47-9c57-ab3655367b8f",
+      "name": "Merge ALL",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        3340,
+        380
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "406ef1b3-c8d0-4e15-bcc0-8abff62791fb",
+      "name": "Loop Over Items2",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1560,
+        1260
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "let emails = []; // Initialize emails as an empty array\n\ntry {\n  // Extract data from input\n  const data = $json.data;\n\n  // Ensure data exists and is a string before proceeding\n  if (typeof data === 'string') {\n    // Define a regular expression to match email addresses\n    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?!png|jpg|gif|jpeg)[a-zA-Z]{2,}/g;\n\n    // Use the regex to extract emails from the input data\n    emails = data.match(emailRegex) || []; // Fallback to an empty array if no matches are found\n  } else {\n    console.log(\"Data is not a string. Skipping email extraction.\");\n  }\n} catch (error) {\n  // Handle and log any unexpected errors\n  console.error(\"An error occurred during email extraction:\", error.message);\n}\n\n// Log the extracted emails for debugging purposes\nconsole.log(\"Extracted Emails:\", emails);\n\n// Return the result in the desired format\nreturn {\n  json: {\n    emails: emails // Return the array of emails (even if empty due to errors)\n  }\n};\n"
+      },
+      "id": "e2100a57-49b2-4b46-9f29-debba4a11bde",
+      "name": "Parse Emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1900,
+        1340
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "0826e70f-0b27-4712-8c0b-796a2075d578",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2360,
+        1340
+      ]
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "emails",
+        "options": {}
+      },
+      "id": "078e7a27-37de-426a-8c4d-caba69a974f1",
+      "name": "Remove Duplicates",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        2620,
+        1340
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "bdf39948-2cdf-4d35-88f8-16dc1584b983",
+      "name": "Merge Socials and Emails",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        3080,
+        1040
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "# email scraper workflow",
+        "height": 681.7677670279538,
+        "width": 1686.0091216923527,
+        "color": 7
+      },
+      "id": "5c965af2-838e-48e6-af53-aca97d420948",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        1180
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.5-preview",
+          "mode": "list",
+          "cachedResultName": "gpt-4.5-preview"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2360,
+        2280
+      ],
+      "id": "3008e738-3884-4dbe-bc7f-39f876031b8a",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "9WpWmiE8A7Gl3BYM",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1820,
+        2540
+      ],
+      "id": "6ec89dfa-5965-4f76-972f-68f4b25ca5c9",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "9WpWmiE8A7Gl3BYM",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://emailverifier.reoon.com/api/v1/verify?email={{ $json.emails }}&key=g6xLcBxlp0D1ikToWrvqzrrJtraaQbbB&mode=quick",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4360,
+        420
+      ],
+      "id": "416dc7ff-2dd0-458f-a572-35861dc23a65",
+      "name": "Email Verification"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bc1609ee-893d-45b1-8eb3-ca462f65bbb6",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "valid",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        4700,
+        360
+      ],
+      "id": "ae16acdc-ccea-4e92-999a-4ddb8297f277",
+      "name": "Filter2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        4160,
+        340
+      ],
+      "id": "69ce2145-e7dd-4b4f-a7f8-14f00f0f10a0",
+      "name": "Loop Over Items3"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4520,
+        400
+      ],
+      "id": "02e62df6-0772-4199-a3dc-8e2325f6edd0",
+      "name": "Wait3",
+      "webhookId": "2f104ac3-656b-401a-8289-4ecb5ffb58ac"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "10Ie6zJ7ZlqrJyyL2g0IhN95IT9qAHHn-YqZbhrkWhGc",
+          "mode": "list",
+          "cachedResultName": "Copy of AI SDR",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10Ie6zJ7ZlqrJyyL2g0IhN95IT9qAHHn-YqZbhrkWhGc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 45901850,
+          "mode": "list",
+          "cachedResultName": "Company Info",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10Ie6zJ7ZlqrJyyL2g0IhN95IT9qAHHn-YqZbhrkWhGc/edit#gid=45901850"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.emails }}",
+            "Social Media Urls": "={{ $('Merge ALL').item.json.items[0].json.formatted_social_media }}",
+            "company_name": "={{ $('Merge ALL').item.json.company_name }}",
+            "website": "={{ $('Merge ALL').item.json.company_website }}",
+            "Company Description": "={{ $('Merge ALL').item.json.company_profile }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "company_name",
+              "displayName": "company_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "website",
+              "displayName": "website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Description",
+              "displayName": "Company Description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Social Media Urls",
+              "displayName": "Social Media Urls",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        5360,
+        360
+      ],
+      "id": "1e2bc4c1-bb59-4fb4-8e73-70d6902931d4",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "BABF9fd2GiPmlycd",
+          "name": "Google Sheets Cred"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Alternative approach that works in most n8n versions\nconst items = [];\n\n// Get all input items\nconst inputItems = Array.isArray($input) ? $input : $input.items || [$input.item];\n\n// Process each item\nfor (const item of inputItems) {\n  // Get the social media data\n  let socialMediaData = item.json.social_media;\n  \n  // Parse it if it's a string\n  if (typeof socialMediaData === 'string') {\n    socialMediaData = JSON.parse(socialMediaData);\n  }\n  \n  // Create formatted output for this item\n  const formattedSocialMedia = socialMediaData.map(platform => {\n    return `${platform.platform}: ${platform.urls[0]}`;\n  }).join('\\n');\n  \n  // Add this processed item to our new array\n  items.push({\n    json: {\n      ...item.json,\n      formatted_social_media: formattedSocialMedia\n    }\n  });\n}\n\n// Return all processed items\nreturn {items};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3140,
+        1880
+      ],
+      "id": "bbd875d0-c319-44e5-8750-b7f039777813",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "domain",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        4920,
+        360
+      ],
+      "id": "fb068234-f28d-4106-af0d-db5fbe843202",
+      "name": "Remove Duplicates1"
+    },
+    {
+      "parameters": {},
+      "id": "aeedd5e0-3137-4f41-99c6-9c7b1b6023da",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1620,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "10Ie6zJ7ZlqrJyyL2g0IhN95IT9qAHHn-YqZbhrkWhGc",
+          "mode": "list",
+          "cachedResultName": "Copy of AI SDR",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10Ie6zJ7ZlqrJyyL2g0IhN95IT9qAHHn-YqZbhrkWhGc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Campaigns",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10Ie6zJ7ZlqrJyyL2g0IhN95IT9qAHHn-YqZbhrkWhGc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "d2f688fb-f3f7-410e-9473-af4b3998580a",
+      "name": "Get Active Campaigns",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -1420,
+        1040
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "BABF9fd2GiPmlycd",
+          "name": "Google Sheets Cred"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst updatedItems = items.map(item => {\n    item.json[\"Start Page\"] = (item.json[\"start_page\"] || 0) + 10;\n    return item;\n});\nreturn updatedItems;\n"
+      },
+      "id": "27678b59-84f3-425d-8068-f915edbdd8f5",
+      "name": "Increment Start Page1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1200,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9d83d6a5-5ce5-4930-88ef-1b43efd28797",
+              "name": "Search Field",
+              "value": "={{ $json.search_field }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b5e7167f-8920-4df7-aa0e-93090c131bef",
+      "name": "Set Search Field",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -980,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://serpapi.com/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "engine",
+              "value": "google_maps"
+            },
+            {
+              "name": "q",
+              "value": "={{ $json['Search Field'] }}"
+            },
+            {
+              "name": "api_key",
+              "value": "8dc450b3ce696ee5b56b8204a1e893b0516b37e1338208c6062bd01f329b4f41"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2cc90db5-af98-4253-a0b8-ca77da44c437",
+      "name": "Google Maps SERP API Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -720,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Access the incoming array of data from the variable local_results\nconst dataArray = $input.item.json.local_results;\n\n// Extract and clean the website and title properties from each object in the array\nconst results = dataArray\n  .map(item => { \n    // Check if the website property exists and is a string\n    const website = item.website && typeof item.website === 'string'\n      ? item.website.split('?')[0] // Remove query parameters\n        .replace(/\\/$/, '') // Remove the trailing slash\n      : null;\n\n    // Check if the title property exists\n    const company = item.title && typeof item.title === 'string' ? item.title : null;\n\n    // Only return the result if the website is valid (not null or empty)\n    if (website) {\n      return { website, company };\n    }\n\n    // Skip entries without a valid website\n    return null;\n  })\n  .filter(result => result !== null); // Remove any null values from the result\n\n// Output the cleaned results as an array of objects\nreturn {\n  results,\n};"
+      },
+      "id": "61b976b2-5c8b-4609-b343-54596a7f587f",
+      "name": "Get Website and Company Name",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -220,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8cbc7dfa-62df-4041-923b-de690fc3628c",
+              "name": "local_results",
+              "value": "={{ $json.local_results }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "abb92a9e-071d-45c9-8757-ef5217354fcb",
+      "name": "Set Data Source",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -480,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4d82104d-a761-447f-a193-7b343169f1ef",
+              "name": "results",
+              "value": "={{ $json.results }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1a327a87-52a9-48d8-946e-5f7b2afab75f",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "results",
+        "options": {}
+      },
+      "id": "3e32e456-c7c7-4826-bd4d-94f51942b105",
+      "name": "Split Out2",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        240,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "company",
+        "options": {}
+      },
+      "id": "15dad887-eb00-49c4-9e0a-83d1b5b2eeb0",
+      "name": "Remove Duplicates2",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        500,
+        1040
+      ]
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        760,
+        1040
+      ],
+      "id": "63b1dda6-c7fb-4f47-9b3b-fd6dc82b542d",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2900,
+        1880
+      ],
+      "id": "068452ba-1f45-484d-8918-364649ded9ca",
+      "name": "Loop Over Items4"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Text (profile)": {
+      "ai_tool": [
+        [
+          {
+            "node": "Company profile",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "URLs (social media)": {
+      "ai_tool": [
+        [
+          {
+            "node": "Contacts & Social links",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text (contact details)": {
+      "ai_tool": [
+        [
+          {
+            "node": "Contacts & Social links",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JSON Parser (social media)1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Social Links Parser Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "URLs (profile)": {
+      "ai_tool": [
+        [
+          {
+            "node": "Company profile",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select company name and website": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Set name and website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI (profile)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Company profile",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Contacts & Social links",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set name and website": {
+      "main": [
+        [
+          {
+            "node": "Merge Company details and profile info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set company profile": {
+      "main": [
+        [
+          {
+            "node": "Merge Company details and profile info",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Set Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Set company profile",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Company profile",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "Query Website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse emails": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Data": {
+      "main": [
+        [
+          {
+            "node": "Social Links Parser Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Website": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map Emails": {
+      "main": [
+        [
+          {
+            "node": "Parse emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Email List": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contacts & Social links": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Social Links Parser Agent": {
+      "main": [
+        [
+          {
+            "node": "Set social media profiles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Company profile": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge ALL": {
+      "main": [
+        [
+          {
+            "node": "Map Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items2": {
+      "main": [
+        [
+          {
+            "node": "Parse Emails",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Emails": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "Merge Socials and Emails",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Set social media profiles": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Company details and profile info": {
+      "main": [
+        [
+          {
+            "node": "Merge ALL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Socials and Emails": {
+      "main": [
+        [
+          {
+            "node": "Merge ALL",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Social Links Parser Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Contacts & Social links",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Verification": {
+      "main": [
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items3": {
+      "main": [
+        [
+          {
+            "node": "Filter2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Verification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter2": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        []
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates1": {
+      "main": [
+        [
+          {
+            "node": "Set Email List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get Active Campaigns",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Active Campaigns": {
+      "main": [
+        [
+          {
+            "node": "Increment Start Page1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Increment Start Page1": {
+      "main": [
+        [
+          {
+            "node": "Set Search Field",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Search Field": {
+      "main": [
+        [
+          {
+            "node": "Google Maps SERP API Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Maps SERP API Request": {
+      "main": [
+        [
+          {
+            "node": "Set Data Source",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Website and Company Name": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Data Source": {
+      "main": [
+        [
+          {
+            "node": "Get Website and Company Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates2": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Select company name and website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items4": {
+      "main": [
+        [
+          {
+            "node": "Merge Socials and Emails",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7841e9b5-ba14-41b3-874e-bf66a1b33611",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eae46237f0b03e1e21495b9d127d17ad71e5e7504c7d7b1084f9a3d34657c561"
+  },
+  "id": "umL9VDfiddTCcWXM",
+  "tags": []
+}
