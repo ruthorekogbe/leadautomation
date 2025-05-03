@@ -22,5 +22,5 @@ c. The Email Finder scans the HTML of each page and extracts email addresses usi
 
 The cool thing is once you set it up, you just add new companies to your sheet and the AI agent handles everything else automatically!
 
-If you want to customize it further, you can add more AI tools like persona identification, or connect it to your CRM or outreach tools.
+To customize it further, you can add more AI tools like persona identification, or connect it to your CRM or outreach tools.
 
